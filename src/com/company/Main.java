@@ -12,9 +12,9 @@ public class Main {
         System.out.println("--------------------------------\n");
 
         //Create a dice with 8 eyes
-        FSMchance fns = new FSMchance();
+        FSMchance fsmChance = new FSMchance();
         //A dice with 8 eyes has 7 middel nodes
-        ArrayList<Node> middleNodes = fns.createNodes(7);
+        ArrayList<Node> middleNodes = fsmChance.createNodes(7);
         //A dice with 8 eyes has 8 outputs
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add("One");
@@ -26,13 +26,13 @@ public class Main {
         outputs.add("Seven");
         outputs.add("eight");
         //A dice with 8 eyes has 8 end nodes
-        ArrayList<Node> endNodes = fns.createEndNodes(outputs);
+        ArrayList<Node> endNodes = fsmChance.createEndNodes(outputs);
         //A total of 15 nodes
-        ArrayList<Node> allNodes = fns.createListOfAllTheNodes(middleNodes, endNodes);
+        ArrayList<Node> allNodes = fsmChance.createListOfAllTheNodes(middleNodes, endNodes);
         //A total of 15 nodes has 4 layers because every node splits into 2 new nodes
-        ArrayList<ArrayList<Node>> layers = fns.createLayersOfTheNodes(2, allNodes);
+        ArrayList<ArrayList<Node>> layers = fsmChance.createLayersOfTheNodes(2, allNodes);
         //The 15 nodes has a total of 14 transitions
-        ArrayList<Transition> allTransitions = fns.createTransitionsNodeToNodeWithWeight(layers, 2);
+        ArrayList<Transition> allTransitions = fsmChance.createTransitionsNodeToNodeWithWeight(layers, 2);
         System.out.println("Amount of transitions: " + allTransitions.size());
         //Every transition has a start node and an end node
         System.out.println("Printing start/end node of every transition.....");
@@ -40,9 +40,9 @@ public class Main {
             System.out.println(trans.getStart().getId() + "  " + trans.getEnd().getId());
         }
         //Giving every node his transitions (in this case every middle node has 2 transitions, the end node doesn't have any)
-        fns.addTransitionsToNodes(allNodes, allTransitions);
+        fsmChance.addTransitionsToNodes(allNodes, allTransitions);
         System.out.println("\nRolling the dice.......");
-        System.out.println("The output of the dice is: " + fns.rollDice(layers.get(0).get(0)));
+        System.out.println("The output of the dice is: " + fsmChance.rollDice(layers.get(0).get(0)));
 
         System.out.println("\n--------------------------------");
         System.out.println("Finite State Machine Text Base");
